@@ -16,15 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         updateData();
-
-//        // link listviews
-//        ListView list = findViewById(R.id.listview);
-//        //EntryDatabase db = EntryDatabase.getInstance(this);
-//        //Cursor cursor = db.selectAll();
-//        //EntryAdapter adapter = new EntryAdapter(this, cursor);
-//        //list.setAdapter(adapter);
-//        list.setOnItemClickListener(new ListClickListener());
-//        list.setOnItemLongClickListener(new ListLongClickListener());
+        ListView list = findViewById(R.id.listview);
+        list.setOnItemClickListener(new ListClickListener());
+        list.setOnItemLongClickListener(new ListLongClickListener());
     }
 
     // shows entry if click
@@ -73,5 +67,12 @@ public class MainActivity extends AppCompatActivity {
         EntryAdapter adapter = new EntryAdapter(MainActivity.this, cursor);
         ListView list = findViewById(R.id.listview);
         list.setAdapter(adapter);
+    }
+
+    @Override
+    // keeps data updated on resume
+    protected void onResume() {
+        super.onResume();
+        updateData();
     }
 }
